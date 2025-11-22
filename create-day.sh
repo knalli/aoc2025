@@ -48,10 +48,10 @@ public class Day${id} {
 EOF
 
   cat <<EOF >"src/main/java/de/knallisworld/aoc2025/day${id}/package-info.java"
-@NonNullApi
+@NullMarked
 package de.knallisworld.aoc2025.day${id};
 
-import org.springframework.lang.NonNullApi;
+import org.jspecify.annotations.NullMarked;
 
 EOF
 

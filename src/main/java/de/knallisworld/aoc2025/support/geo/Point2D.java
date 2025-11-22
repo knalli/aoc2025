@@ -2,7 +2,7 @@ package de.knallisworld.aoc2025.support.geo;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Map;

@@ -1,6 +1,6 @@
 package de.knallisworld.aoc2025.support.lang;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Consumer;

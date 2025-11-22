@@ -1,4 +1,5 @@
-@NonNullApi
+@NullMarked
 package de.knallisworld.aoc2025.support.geo;
 
-import org.springframework.lang.NonNullApi;
+import org.jspecify.annotations.NullMarked;
+
