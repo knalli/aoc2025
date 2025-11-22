@@ -20,11 +20,11 @@ public class Point2D<T extends Number> {
 	static final Map<Number, Map<Number, Point2D<?>>> CACHE = new WeakHashMap<>();
 
 	static final BiFunction<Number, Integer, Number> DEFAULT_ADDER = (t, addingValue) -> {
-		if (t instanceof Integer i) {
-			return Integer.valueOf((i + addingValue));
+		if (t instanceof int i) {
+			return i + addingValue;
 		}
-		if (t instanceof Long l) {
-			return Long.valueOf((l + addingValue));
+		if (t instanceof long l) {
+			return l + addingValue;
 		}
 		throw new IllegalStateException("unsupported type");
 	};
