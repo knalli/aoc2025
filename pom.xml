@@ -25,6 +25,9 @@
         <commons-geometry.version>1.0</commons-geometry.version>
         <commons-math3.version>3.4.1</commons-math3.version>
         <jgrapht-core.version>1.5.2</jgrapht-core.version>
+
+        <!-- plugins -->
+        <error-prone.version>2.44.0</error-prone.version>
     </properties>
 
     <dependencyManagement>
@@ -120,5 +123,54 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+
+        <profile>
+            <id>compile-error-prone</id>
+            <activation>
+                <property>
+                    <name>COMPILE_ERROR_PRONE</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <compilerArgs combine.children="append">
+                                <arg>-XDcompilePolicy=simple</arg>
+                                <arg>--should-stop=ifError=FLOW</arg>
+                                <arg>
+                                    -Xplugin:ErrorProne
+                                    -XepDisableWarningsInGeneratedCode
+                                    -XepExcludedPaths:.*/generated-sources/.*
+                                    -Xep:OptionalOfRedundantMethod:OFF
+                                </arg>
+                            </compilerArgs>
+                            <showWarnings>true</showWarnings>
+                            <showDeprecation>true</showDeprecation>
+                            <release>${java.version}</release>
+                            <annotationProcessorPaths>
+                                <path>
+                                    <groupId>com.google.errorprone</groupId>
+                                    <artifactId>error_prone_core</artifactId>
+                                    <version>${error-prone.version}</version>
+                                </path>
+                                <path>
+                                    <groupId>org.projectlombok</groupId>
+                                    <artifactId>lombok</artifactId>
+                                    <version>${lombok.version}</version>
+                                </path>
+                            </annotationProcessorPaths>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    </profiles>
 
 </project>
