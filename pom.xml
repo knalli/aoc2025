@@ -25,7 +25,6 @@
         <commons-geometry.version>1.0</commons-geometry.version>
         <commons-math3.version>3.4.1</commons-math3.version>
         <jgrapht-core.version>1.5.2</jgrapht-core.version>
-        <log4j.version>2.24.2</log4j.version>
     </properties>
 
     <dependencyManagement>
@@ -34,16 +33,6 @@
                 <groupId>org.jgrapht</groupId>
                 <artifactId>jgrapht-core</artifactId>
                 <version>${jgrapht-core.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-api</artifactId>
-                <version>${log4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-core</artifactId>
-                <version>${log4j.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
@@ -117,11 +106,6 @@
                     <release>${java.version}</release>
                     <compilerArgs>--enable-preview</compilerArgs>
                 </configuration>
-            </plugin>
-            <!-- setup for native builds, just for experiments -->
-            <plugin>
-                <groupId>org.graalvm.buildtools</groupId>
-                <artifactId>native-maven-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
