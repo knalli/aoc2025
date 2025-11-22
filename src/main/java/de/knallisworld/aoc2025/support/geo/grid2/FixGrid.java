@@ -48,19 +48,19 @@ public class FixGrid<T> {
 
 								  final var temp = FixGrid.create(src.type, scale, scale);
 								  valueExtrapolator.accept(
-									  new FieldsView.Field<>(
-										  dstCenter,
-										  dst.getValueRequired(dstCenter)
-									  ),
-									  temp
+										  new FieldsView.Field<>(
+												  dstCenter,
+												  dst.getValueRequired(dstCenter)
+										  ),
+										  temp
 								  );
 
 								  temp.fields()
 									  .forEach(field -> {
 										  dst.setValue(
-											  dstOffset.getX() + field.pos().getX(),
-											  dstOffset.getY() + field.pos().getY(),
-											  field.value()
+												  dstOffset.getX() + field.pos().getX(),
+												  dstOffset.getY() + field.pos().getY(),
+												  field.value()
 										  );
 									  });
 							  });
@@ -163,9 +163,9 @@ public class FixGrid<T> {
 		final var limitY = Math.min(bottomRight.getY(), getHeight() - 1);
 		final var limitX = Math.min(bottomRight.getX(), getWidth() - 1);
 		final var result = FixGrid.create(
-			type,
-			limitY - offsetY,
-			limitX - offsetX
+				type,
+				limitY - offsetY,
+				limitX - offsetX
 		);
 		for (var y = offsetY; y <= limitY; y++) {
 			for (var x = offsetX; x <= limitX; x++) {
@@ -206,29 +206,29 @@ public class FixGrid<T> {
 
 		public Stream<Field<T>> stream() {
 			return IntStream
-				.range(0, grid.data.length)
-				.boxed()
-				.flatMap(y -> IntStream
-					.range(0, grid.data[y].length)
+					.range(0, grid.data.length)
 					.boxed()
-					.map(x -> Point2D.create(x, y))
-					.filter(grid::hasValue)
-					.map(p -> new Field<>(p, grid.getValueRequired(p)))
-				);
+					.flatMap(y -> IntStream
+							.range(0, grid.data[y].length)
+							.boxed()
+							.map(x -> Point2D.create(x, y))
+							.filter(grid::hasValue)
+							.map(p -> new Field<>(p, grid.getValueRequired(p)))
+					);
 		}
 
 		public Stream<Field<T>> row(final int searchY) {
 			return IntStream
-				.range(0, grid.data.length)
-				.filter(y -> y == floorMod(searchY, grid.data.length))
-				.boxed()
-				.flatMap(y -> IntStream
-					.range(0, grid.data[y].length)
+					.range(0, grid.data.length)
+					.filter(y -> y == floorMod(searchY, grid.data.length))
 					.boxed()
-					.map(x -> Point2D.create(x, y))
-					.filter(grid::hasValue)
-					.map(p -> new Field<>(p, grid.getValueRequired(p)))
-				);
+					.flatMap(y -> IntStream
+							.range(0, grid.data[y].length)
+							.boxed()
+							.map(x -> Point2D.create(x, y))
+							.filter(grid::hasValue)
+							.map(p -> new Field<>(p, grid.getValueRequired(p)))
+					);
 		}
 
 		public void forEach(final Consumer<Field<T>> consumer) {
@@ -250,10 +250,10 @@ public class FixGrid<T> {
 				final var n = q.pop();
 				cluster.add(n);
 				getAdjacents4(n)
-					.filter(not(cluster::contains))
-					.filter(not(q::contains))
-					.filter(a -> filter.test(new Field<>(a, grid.getValueRequired(a))))
-					.forEach(q::add);
+						.filter(not(cluster::contains))
+						.filter(not(q::contains))
+						.filter(a -> filter.test(new Field<>(a, grid.getValueRequired(a))))
+						.forEach(q::add);
 			}
 			return cluster.stream();
 		}
