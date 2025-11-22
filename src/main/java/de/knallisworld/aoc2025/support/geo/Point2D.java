@@ -33,8 +33,7 @@ public class Point2D<T extends Number> {
 
 	final T y;
 
-	@Nullable
-	private final BiFunction<T, Integer, T> adder;
+	private final @Nullable BiFunction<T, Integer, T> adder;
 
 	/**
 	 * Ensure instances are unique, improve memory usage
@@ -56,7 +55,7 @@ public class Point2D<T extends Number> {
 	static <T extends Number> Point2D<T> create(
 			final T x,
 			final T y,
-			@Nullable final BiFunction<T, Integer, T> adder
+			final @Nullable BiFunction<T, Integer, T> adder
 	) {
 		return lookupCache(x, y, () -> create0(x, y, adder));
 	}
@@ -64,7 +63,7 @@ public class Point2D<T extends Number> {
 	static <T extends Number> Point2D<T> create0(
 			final T x,
 			final T y,
-			@Nullable final BiFunction<T, Integer, T> adder
+			final @Nullable BiFunction<T, Integer, T> adder
 	) {
 		return new Point2D<>(
 				x,
@@ -82,7 +81,7 @@ public class Point2D<T extends Number> {
 
 	Point2D(final T x,
 			final T y,
-			@Nullable final BiFunction<T, Integer, T> adder) {
+			final @Nullable BiFunction<T, Integer, T> adder) {
 		this.x = x;
 		this.y = y;
 		this.adder = adder;

@@ -10,7 +10,7 @@ import static de.knallisworld.aoc2025.support.lang.MemoizationOptions.withDefaul
 
 public class Memoization {
 
-	public static <I, O> Function<I, O> memoize(final Function<I, O> loader) {
+	public static <I, O> Function<I, @Nullable O> memoize(final Function<I, @Nullable O> loader) {
 		return memoize(loader, withDefault());
 	}
 
@@ -24,8 +24,8 @@ public class Memoization {
 	 * @param <O>    output type
 	 * @return curried function
 	 */
-	public static <I, O> Function<I, O> memoize(final Function<I, O> loader,
-												final Consumer<MemoizationOptions.MemoizationOptionsBuilder> configurer) {
+	public static <I, O> Function<I, @Nullable O> memoize(final Function<I, @Nullable O> loader,
+														  final Consumer<MemoizationOptions.MemoizationOptionsBuilder> configurer) {
 		final Function<I, Optional<O>> memoize = memoize0(
 				input -> Optional.ofNullable(loader.apply(input)),
 				configurer
