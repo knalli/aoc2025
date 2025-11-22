@@ -28,6 +28,7 @@
 
         <!-- plugins -->
         <error-prone.version>2.44.0</error-prone.version>
+        <nullaway.version>0.9.9</nullaway.version>
     </properties>
 
     <dependencyManagement>
@@ -153,6 +154,10 @@
                                     -XepDisableWarningsInGeneratedCode
                                     -XepExcludedPaths:.*/generated-sources/.*
                                     -Xep:OptionalOfRedundantMethod:OFF
+                                    -XepOpt:NullAway:TreatGeneratedAsUnannotated=true
+                                    -XepOpt:NullAway:AnnotatedPackages=io.github
+                                    -XepOpt:NullAway:AcknowledgeRestrictiveAnnotations=true
+                                    -Xep:NullAway:ERROR
                                 </arg>
                             </compilerArgs>
                             <showWarnings>true</showWarnings>
@@ -167,6 +172,11 @@
                                     <groupId>org.projectlombok</groupId>
                                     <artifactId>lombok</artifactId>
                                     <version>${lombok.version}</version>
+                                </path>
+                                <path>
+                                    <groupId>com.uber.nullaway</groupId>
+                                    <artifactId>nullaway</artifactId>
+                                    <version>${nullaway.version}</version>
                                 </path>
                             </annotationProcessorPaths>
                         </configuration>
